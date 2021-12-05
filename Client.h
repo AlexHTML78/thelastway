@@ -4,15 +4,15 @@
 #include <string>
 using namespace std;
 
-//фио клиента, номер заказа
+//С„РёРѕ РєР»РёРµРЅС‚Р°, РЅРѕРјРµСЂ Р·Р°РєР°Р·Р°
 class Client {
 protected:
-	int Numb; // Номер заказа
-	string ClientFIO; // ФИО клиента
+	int Numb; // РќРѕРјРµСЂ Р·Р°РєР°Р·Р°
+	string ClientFIO; // Р¤РРћ РєР»РёРµРЅС‚Р°
 public:
-	int getNumb(); // Получает номер заказа
-	string getClientFIO(); // Получает ФИО клиента
-	Client(string ClietnFIO);
+	int getNumb(); // РџРѕР»СѓС‡Р°РµС‚ РЅРѕРјРµСЂ Р·Р°РєР°Р·Р°
+	string getClientFIO(); // РџРѕР»СѓС‡Р°РµС‚ Р¤РРћ РєР»РёРµРЅС‚Р°
+	Client(string ClientFIO);
 	~Client();
 
 };

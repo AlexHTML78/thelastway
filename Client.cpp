@@ -9,7 +9,7 @@ Client::Client(string FIO):ClientFIO(FIO)
 
 string Client::getClientFIO() {
 	return ClientFIO;
-}; // Ворует номер заказа
+}; // Ворует ФИО клиента
 
 Client::~Client() {
 };
@@ -17,7 +17,7 @@ Client::~Client() {
 
 int main() {
 	Client Anatoliy("Фёдорович");
-	string Perviy(Anatoliy.getClientFIO);
+	string Perviy(Anatoliy.getClientFIO());
 	cout << Perviy << endl;
 	getchar;
 	return 0;

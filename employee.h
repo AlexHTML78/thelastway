@@ -5,13 +5,14 @@
 using namespace std;
 
 
-// интерфейс класса Работник (родитель для классов Секретарь и Бухгалтер
+// интерфейс класса Работник (родитель для классов Секретарь и Бухгалтер)
 class Employee {
 
 protected:
 	string FIO; // фио работника
 public:
 	Employee(string FIO);
+	Employee();
 	~Employee();
 	string getEmployeeFio(); // возвращает ФИО работника
 
@@ -29,13 +30,17 @@ public:
 // интерфейс класса Секретарь
 class BookKeeper : public Employee {
 public:
-	string setClientFIO(); // устанавливает ФИО клиента
-	string setDeceasedFIO(); // устанавливает ФИО умершего
-	string setBurialType(); // устанавливает способ захоронения
-	string setDescription(); // записывает дополнительные сведения для заказа 
-	int setPrice(); // устанавливает цену на услугу
-	int setIncome(); // устанавливает доход от услуги
-	int setProfit(); // считает и устанавливает прибыль бюро от заказа
+	BookKeeper() : Employee() {};
+	BookKeeper(string FIO) : Employee(FIO) {};
+
+	void setClientFIO(); // устанавливает ФИО клиента
+	void setDeceasedFIO(); // устанавливает ФИО умершего
+	void setBurialType(); // устанавливает способ захоронения
+	void setDescription(); // записывает дополнительные сведения для заказа 
+	void setPrice(); // устанавливает цену на услугу
+	void setIncome(); // устанавливает доход от услуги
+	void setProfit(); // считает и устанавливает прибыль бюро от заказа
+	~BookKeeper();
 };
 
 

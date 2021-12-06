@@ -44,13 +44,13 @@ Order::~Order() {
 };
 
 
-int main2() {
+int main() {
 	Order Test1(1);
 	Order Test2(2);
 	int FirstNumb(Test1.getNumb());
 	int SecondNumb(Test2.getNumb());
 	cout << FirstNumb << endl;
 	cout << SecondNumb << endl;
-	getchar;
+	getchar();
 	return 0;
 };

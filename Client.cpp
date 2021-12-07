@@ -15,7 +15,7 @@ Client::~Client() {
 };
 
 
-int main() {
+int main2() {
 	Client Anatoliy("Фёдорович");
 	string Perviy(Anatoliy.getClientFIO());
 	cout << Perviy << endl;

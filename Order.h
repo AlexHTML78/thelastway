@@ -2,6 +2,7 @@
 #define __Order_H__
 #include <iostream>
 #include <string>
+#include <list>
 using namespace std;
 //Интерфейс класса Заказ.
 class Order {
@@ -28,5 +29,43 @@ public:
 
 };
 
+class OrderList
+{
+private:
+	// установить указатели на заказ
+	list <Order*> setPtrsOrd; // указатели на класс заказ
+	list <Order*>::iterator iter; //итератор
+public:
+	~OrderList(); // деструктор (удаление заказа)
+	void insertOrder(Order*); // добавить заказ в список
+	int getNumb( string ); // возвращает номер 
+	void display(); // вывод списка заказов
+};
+
+class OrderInputScreen
+{
+private:
+	OrderList* ptrOrderList;
+	string tName;
+	int OrdNumb;
+public:
+	OrderInputScreen(OrderList* ptrTL) : ptrOrderList(ptrTL)
+	{
+		/* тут пусто */
+	}
+	void setOrder(); // добавить данные о заказе
+};
+
+class UserInterface
+{
+private:
+	OrderList* ptrOrderList;
+	OrderInputScreen* ptrOrderInputScreen;
+	char ch;
+public:
+	UserInterface();
+	~UserInterface();
+	void interact();
+};
 
 #endif // __ORDER_H__

@@ -44,13 +44,84 @@ Order::~Order() {
 };
 
 
+void getaLine(string& inStr) // получение строки текста
+{
+	char temp[21];
+	cin.get(temp, 20, '\n');
+	cin.ignore(20, '\n'); //число пропускаемых символов и символ разделения
+	inStr = temp;
+}
+//---------------------------------------------------------
+char getaChar() // получение символа
+{
+	char ch = cin.get();
+	cin.ignore(80, '\n'); //число пропускаемых символов и символ разделения
+	return ch;
+}
+
+
+
+///////////метод класса OrderInputScreen//////////////////
+void OrderInputScreen::setOrder() // добавить данные о заказе
+{
+cout << "Введите номер заказа : " << endl;
+cin >> OrdNumb;
+cin.ignore(80, '\n');
+Order* ptrOrder = new Order(OrdNumb); // создать заказ
+ptrOrderList->insertOrder(ptrOrder); // занести в список заказов
+}
+//---------------------------------------------------------
+////////////////методы класса OrderList///////////////////
+OrderList::~OrderList() // деструктор
+{
+while (!setPtrsOrd.empty()) // удаление всех заказов
+{ // удаление указателей из контейнера
+iter = setPtrsOrd.begin();
+delete *iter;
+setPtrsOrd.erase(iter);
+}
+}
+//---------------------------------------------------------
+void OrderList::insertOrder(Order* ptrT)
+{
+setPtrsOrd.push_back(ptrT); // вставка нового заказа в список
+}
+//---------------------------------------------------------
+
+
+void OrderList::display() // вывод списка заказов
+{
+if (setPtrsOrd.empty()) // если список заказов пуст
+cout << "***Нет Заказов***\n" << endl; // выводим запись, что он пуст)
+else
+{
+	cout << "Номер \n";
+iter = setPtrsOrd.begin();
+while (iter != setPtrsOrd.end()) // распечатываем всех заказов
+{
+cout << (*iter)->getNumb()  << endl;
+*iter++;
+}
+}
+}
+//---------------------------------------------------------
+
+
+
 int main() {
-	Order Test1(1);
-	Order Test2(2);
-	int FirstNumb(Test1.getNumb());
-	int SecondNumb(Test2.getNumb());
-	cout << FirstNumb << endl;
-	cout << SecondNumb << endl;
-	getchar();
+	setlocale(LC_ALL, "rus");
+	int Komnati;
+	cout << "Введите кол-во заказов " << endl;
+	cin >> Komnati;
+	OrderList* ptrOrderList;
+	ptrOrderList = new OrderList;
+	OrderInputScreen* ptrOrderInputScreen;
+	for (int i = 0;i < Komnati;i++) {
+		ptrOrderInputScreen =
+		new OrderInputScreen(ptrOrderList);
+		ptrOrderInputScreen->setOrder();
+		delete ptrOrderInputScreen;
+	}
+	ptrOrderList->display();
 	return 0;
 };

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include "Order.h"
+
 using namespace std;
 
 Order::Order(int Number):Numb(Number)
@@ -62,13 +63,19 @@ char getaChar() // получение символа
 
 
 ///////////метод класса OrderInputScreen//////////////////
-void OrderInputScreen::setOrder() // добавить данные о заказе
+void OrderInputScreen::setOrder(BookKeeper &name, int i) // добавить данные о заказе
 {
-cout << "Введите номер заказа : " << endl;
-cin >> OrdNumb;
-cin.ignore(80, '\n');
-Order* ptrOrder = new Order(OrdNumb); // создать заказ
-ptrOrderList->insertOrder(ptrOrder); // занести в список заказов
+	Order* ptrOrder = new Order(i); // создать заказ
+
+	ptrOrder->ClientFIO = name.setClientFIO(); 
+	ptrOrder->DeceasedFIO = name.setDeceasedFIO();
+	ptrOrder->BurialType =  name.setBurialType();
+	ptrOrder->Description = name.setDescription();
+	ptrOrder->Price = stoi(name.setPrice());
+	ptrOrder->Income = stoi(name.setIncome());
+	ptrOrder->Profit = stoi(name.setProfit(ptrOrder->Price, ptrOrder->Income));
+
+	ptrOrderList->insertOrder(ptrOrder);
 }
 //---------------------------------------------------------
 ////////////////методы класса OrderList///////////////////
@@ -95,11 +102,12 @@ if (setPtrsOrd.empty()) // если список заказов пуст
 cout << "***Нет Заказов***\n" << endl; // выводим запись, что он пуст)
 else
 {
-	cout << "Номер \n";
 iter = setPtrsOrd.begin();
-while (iter != setPtrsOrd.end()) // распечатываем всех заказов
+cout << "#" << "    " << "FIO DECEASED" << endl; // заголовок таблицы
+while (iter != setPtrsOrd.end()) // распечатываем список всех заказов
 {
-cout << (*iter)->getNumb()  << endl;
+
+cout << (*iter)->getNumb() << (*iter)->getDeceasedFIO() << "   " << (*iter)->getProfit() << endl; //построчный вывод данных
 *iter++;
 }
 }
@@ -110,18 +118,25 @@ cout << (*iter)->getNumb()  << endl;
 
 int main() {
 	setlocale(LC_ALL, "rus");
-	int Komnati;
-	cout << "Введите кол-во заказов " << endl;
-	cin >> Komnati;
+
+	// это все отправляется в main.cpp
+	BookKeeper bookKeeper1;
+
 	OrderList* ptrOrderList;
 	ptrOrderList = new OrderList;
 	OrderInputScreen* ptrOrderInputScreen;
-	for (int i = 0;i < Komnati;i++) {
+	for (int i = 0;i < 3;i++) {
 		ptrOrderInputScreen =
 		new OrderInputScreen(ptrOrderList);
-		ptrOrderInputScreen->setOrder();
+		ptrOrderInputScreen->setOrder(bookKeeper1, i);
+		cin.ignore(); // исправляет пропуск следующего ввода
 		delete ptrOrderInputScreen;
 	}
 	ptrOrderList->display();
+
+
 	return 0;
+
 };
+
+

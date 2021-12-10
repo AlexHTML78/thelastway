@@ -33,13 +33,13 @@ public:
 	BookKeeper() : Employee() {};
 	BookKeeper(string FIO) : Employee(FIO) {};
 
-	void setClientFIO(); // устанавливает ФИО клиента
-	void setDeceasedFIO(); // устанавливает ФИО умершего
-	void setBurialType(); // устанавливает способ захоронения
-	void setDescription(); // записывает дополнительные сведения для заказа 
-	void setPrice(); // устанавливает цену на услугу
-	void setIncome(); // устанавливает доход от услуги
-	void setProfit(); // считает и устанавливает прибыль бюро от заказа
+	string setClientFIO(); // устанавливает ФИО клиента
+	string setDeceasedFIO(); // устанавливает ФИО умершего
+	string setBurialType(); // устанавливает способ захоронения
+	string setDescription(); // записывает дополнительные сведения для заказа 
+	string setPrice(); // устанавливает цену на услугу
+	string setIncome(); // устанавливает доход от услуги
+	string setProfit(int price, int income); // считает и устанавливает прибыль бюро от заказа
 	~BookKeeper();
 };
 

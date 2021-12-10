@@ -3,11 +3,14 @@
 #include <iostream>
 #include <string>
 #include <list>
+#include "employee.h" //после создания main.cpp проверить, возможно в этой строчке нет необходимости
+
 using namespace std;
 //Интерфейс класса Заказ.
 class Order {
 protected:
 	int Numb; // Номер заказа
+public:
 	string ClientFIO; //  ФИО клиента
 	string DeceasedFIO; //  ФИО умершего
 	string BurialType; //  способ захоронения
@@ -15,7 +18,6 @@ protected:
 	int Price; //  цена на услугу
 	int Income; //  доход от услуги
 	int Profit; //прибыль бюро от заказа
-public:
 	int getNumb(); // Ворует номер заказа
 	string getClientFIO(); // ворует ФИО клиента
 	string getDeceasedFIO(); // ворует ФИО умершего
@@ -38,24 +40,24 @@ private:
 public:
 	~OrderList(); // деструктор (удаление заказа)
 	void insertOrder(Order*); // добавить заказ в список
-	int getNumb( string ); // возвращает номер 
+	//int getNumb(); // возвращает номер 
 	void display(); // вывод списка заказов
 };
 
 class OrderInputScreen
 {
 private:
-	OrderList* ptrOrderList;
+	
 	string tName;
 	int OrdNumb;
 public:
-	OrderInputScreen(OrderList* ptrTL) : ptrOrderList(ptrTL)
-	{
-		/* тут пусто */
-	}
-	void setOrder(); // добавить данные о заказе
+	OrderInputScreen(OrderList* ptrTL) : ptrOrderList(ptrTL) {};
+	void setOrder(BookKeeper &name,int); // добавить данные о заказе
+	OrderList* ptrOrderList;
 };
 
+
+// удалить
 class UserInterface
 {
 private:

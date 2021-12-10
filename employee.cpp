@@ -1,11 +1,21 @@
 #include <iostream>
 #include <string>
 #include "employee.h"
+#include "Order.h"
 using namespace std;
 
 Employee::Employee(string data) : FIO(data)
 {
 }
+
+Employee::Employee()
+{
+	string name;
+	cout << "Введите Ваше ФИО: " << endl;
+	getline(cin, name);
+	this->FIO = name;
+}
+
 Employee::~Employee()
 {
 }
@@ -16,29 +26,30 @@ string Employee::getEmployeeFio()
 }
 
 
-
 BookKeeper::~BookKeeper()
 {
 }
 
-void BookKeeper::setClientFIO() {// добавить данные о жильце
+string BookKeeper::setClientFIO() {// добавить данные о жильце
 	cout << "Введите ФИО клиента (Павлов Павел Павлович): " << endl;
 	string clientFIO;
 	getline(cin, clientFIO);
+	return clientFIO;
 	//Client* ptrClient = new Client(clientFIO); // создать клиента
 	//ptrTenantList->insertTenant(ptrTenant);
 }
 
-void BookKeeper::setDeceasedFIO() {
+string BookKeeper::setDeceasedFIO() {
 	cout << "Введите ФИО умершего (Павлов Павел Павлович): " << endl;
 	string deceasedFIO;
 	getline(cin, deceasedFIO);
+	return deceasedFIO;
 }
 
 
-void BookKeeper::setBurialType() {
+string BookKeeper::setBurialType() {
 	int selectedType;
-
+	string BurialType;
 	cout << "Выберите тип услуги: " << endl
 		 <<	"(1) Захоронение в гробу" << endl
 		 << "(2) Кремация" << endl;
@@ -46,67 +57,71 @@ void BookKeeper::setBurialType() {
 	switch (selectedType)
 	{
 	case 1: {
-		string BurialType("Захоронение в гробу");
-		cout << "grob" << endl;
+		BurialType = "Захоронение в гробу";
 		break;
 	}
 		
 	case 2: {
-		string BurialType("Кремация");
-		cout << "vaza" << endl;
+		BurialType = "Кремация";
 		break;
 	}
 	default: {
-		string BurialType("Захоронение в гробу");
-		cout << "grob" << endl;
+		BurialType = "Захоронение в гробу";
 		break;
 	}
 		
 	}
-
+	return BurialType;
 }
 
 
-void BookKeeper::setDescription() {
-	// if/else -> order.descr = "..."
+string BookKeeper::setDescription() {
+	string description;
+	cout << "Введите подробности заказа: " << endl;
+	getline(cin, description);
+	return description;
 }
 
 
 
-void BookKeeper::setPrice() {
+string BookKeeper::setPrice() {
 	cout << "Введите цену на услуги: " << endl;
-	int price;
+	string price;
 	cin >> price;
-	//order.price = price;
+	return price;
 }
 
-void BookKeeper::setIncome() {
+string BookKeeper::setIncome() {
 	cout << "Введите доход с оказания услуг: " << endl;
-	int income;
+	string income;
 	cin >> income;
-	//order.income = income;
+	return income;
 }
 
-void BookKeeper::setProfit() {
-	
-	//order.profit = order.income - order.price;
+string BookKeeper::setProfit(int price, int income) {
+	string profit = to_string(income - price);
+	return profit;
 }
 
-//int main() {
-int bookKeeperFunc() {
+int main12() {
+//int bookKeeperFunc() {
+	// реализация интерфейся пойдет в main.cpp
 	setlocale(LC_ALL, "rus");
 
-	string secrName;
-	cout << "Введите Ваше ФИО: " << endl;
-	getline(cin, secrName);
-	BookKeeper bookKeeper1(secrName);
+	
+	//BookKeeper bookKeeper1(secrName);
+	while (true) {
+		cout << "press q+enter to exit" << endl;
+		int ch = cin.get();
+		if (ch == 'q') {
+			return 0;
+		}
+		else {
+			//setOrder();
 
-	bookKeeper1.setClientFIO();
-	bookKeeper1.setDeceasedFIO();
-	bookKeeper1.setBurialType();
-	bookKeeper1.setDescription();
-	bookKeeper1.setPrice();
-	bookKeeper1.setIncome();
-	bookKeeper1.setProfit();
+			
+		}
+	}
+	
 	return 0;
 };

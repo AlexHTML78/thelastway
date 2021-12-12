@@ -43,7 +43,7 @@ public:
 	//int getNumb(); // возвращает номер 
 	void display(string); // вывод списка заказов
 };
-
+//
 class OrderInputScreen
 {
 private:

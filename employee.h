@@ -26,6 +26,7 @@ public:
 	Accountant() :Employee() {};
 	Accountant(string FIO) : Employee(FIO) {};
 	~Accountant();
+    void getMoneyRecord(OrderList &Name); // выводит таблицу-отчет по денежному обороту
 	void getOrdersRecord(OrderList &Name); // выводит таблицу-отчет по заказам
 	void display();
 };

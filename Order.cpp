@@ -117,7 +117,28 @@ void OrderList::display(string Type) // вывод списка заказов
 			}
 		}
 	}
-	
+	if (Type == "Money")
+	{
+		if (setPtrsOrd.empty()) // если список заказов пуст
+			cout << "***Ќет данных***\n" << endl; // выводим запись, что он пуст)
+		else
+		{
+			int Numbers=0,Prices=0,Incomes=0,Profits=0;
+			Numbers = 0;
+			iter = setPtrsOrd.begin();
+			cout << " ол-во клиентов в базе" << "\t" << "–асходы" << "\t" <<
+			"ƒоход" << "\t" << "ѕрибыль" << "\t" << endl; // заголовок таблицы
+			while (iter != setPtrsOrd.end()) // распечатываем список всех заказов
+			{
+				Prices += (*iter)->getPrice();
+				Incomes += (*iter)->getIncome();
+				Profits += (*iter)->getProfit();
+				Numbers++;
+				*iter++;
+			}
+			cout << Numbers<<"\t\t\t"<<Prices << "\t" << Incomes << "\t" << Profits << "\t" << endl;
+		}
+	}
 }
 //---------------------------------------------------------
 
@@ -140,7 +161,7 @@ int main() {
 		delete ptrOrderInputScreen;
 	}
 	
-	Buhg.getOrdersRecord(*ptrOrderList);
+	Buhg.getMoneyRecord(*ptrOrderList);
 
 
 	return 0;

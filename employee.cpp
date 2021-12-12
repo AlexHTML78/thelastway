@@ -112,7 +112,10 @@ Accountant::~Accountant()
 {
 }
 
-
+void Accountant::getMoneyRecord(OrderList &Orders) {// выводит таблицу-отчет по денежному обороту
+	string Type = "Money";
+	Orders.display(Type);
+}
 void Accountant::getOrdersRecord(OrderList &Orders)  // выводит таблицу-отчет по заказам
 	{ 
 	string Type = "Orders";

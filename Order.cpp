@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include "Order.h"
+#include "employee.h"
 
 using namespace std;
 
@@ -74,7 +75,6 @@ void OrderInputScreen::setOrder(BookKeeper &name, int i) // добавить данные о за
 	ptrOrder->Price = stoi(name.setPrice());
 	ptrOrder->Income = stoi(name.setIncome());
 	ptrOrder->Profit = stoi(name.setProfit(ptrOrder->Price, ptrOrder->Income));
-
 	ptrOrderList->insertOrder(ptrOrder);
 }
 //---------------------------------------------------------
@@ -96,21 +96,28 @@ setPtrsOrd.push_back(ptrT); // вставка нового заказа в список
 //---------------------------------------------------------
 
 
-void OrderList::display() // вывод списка заказов
+void OrderList::display(string Type) // вывод списка заказов
 {
-if (setPtrsOrd.empty()) // если список заказов пуст
-cout << "***Нет Заказов***\n" << endl; // выводим запись, что он пуст)
-else
-{
-iter = setPtrsOrd.begin();
-cout << "#" << "    " << "FIO DECEASED" << endl; // заголовок таблицы
-while (iter != setPtrsOrd.end()) // распечатываем список всех заказов
-{
+	if (Type == "Orders") 
+	{
+	if (setPtrsOrd.empty()) // если список заказов пуст
+		cout << "***Нет Заказов***\n" << endl; // выводим запись, что он пуст)
+	else
+		{
+		iter = setPtrsOrd.begin();
+		cout << "№" << "\t" <<"Клиент" << "\t" << "Умерший" << "\t" <<"Подробности"<<"\t"<< "Способ захоронения" <<"\t"<<"Стоимость"
+			<< "\t" << "Доход"<<"\t" << "Прибыль" << endl; // заголовок таблицы
+		while (iter != setPtrsOrd.end()) // распечатываем список всех заказов
+			{
 
-cout << (*iter)->getNumb() << (*iter)->getDeceasedFIO() << "   " << (*iter)->getProfit() << endl; //построчный вывод данных
-*iter++;
-}
-}
+			cout << (*iter)->getNumb() << " \t " << (*iter)->getClientFIO() << "\t" << (*iter)->getDeceasedFIO()<<"\t" << (*iter)->getDescription()
+				<<"\t"<< (*iter)->getBurialType()<<"\t"<< (*iter)->getPrice() <<"\t"<< (*iter)->getIncome()<<"\t"
+				 << (*iter)->getProfit()<< endl; //построчный вывод данных
+			*iter++;
+			}
+		}
+	}
+	
 }
 //---------------------------------------------------------
 
@@ -121,7 +128,7 @@ int main() {
 
 	// это все отправляется в main.cpp
 	BookKeeper bookKeeper1;
-
+	Accountant Buhg;
 	OrderList* ptrOrderList;
 	ptrOrderList = new OrderList;
 	OrderInputScreen* ptrOrderInputScreen;
@@ -129,10 +136,11 @@ int main() {
 		ptrOrderInputScreen =
 		new OrderInputScreen(ptrOrderList);
 		ptrOrderInputScreen->setOrder(bookKeeper1, i);
-		cin.ignore(); // исправляет пропуск следующего ввода
+		cin.ignore(20, '\n'); //число пропускаемых символов и символ разделения
 		delete ptrOrderInputScreen;
 	}
-	ptrOrderList->display();
+	
+	Buhg.getOrdersRecord(*ptrOrderList);
 
 
 	return 0;

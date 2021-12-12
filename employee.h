@@ -4,6 +4,7 @@
 #include <string>
 using namespace std;
 
+class OrderList;
 
 // интерфейс класса Работник (родитель для классов Секретарь и Бухгалтер)
 class Employee {
@@ -22,8 +23,11 @@ public:
 // интерфейс класса Бухглатер
 class Accountant : public Employee {
 public:
-    void getMoneyRecord(); // выводит таблицу-отчет по денежному обороту
-	void getOrdersRecord(); // выводит таблицу-отчет по заказам
+	Accountant() :Employee() {};
+	Accountant(string FIO) : Employee(FIO) {};
+	~Accountant();
+	void getOrdersRecord(OrderList &Name); // выводит таблицу-отчет по заказам
+	void display();
 };
 
 

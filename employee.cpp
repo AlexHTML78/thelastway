@@ -79,6 +79,7 @@ string BookKeeper::setDescription() {
 	string description;
 	cout << "Введите подробности заказа: " << endl;
 	getline(cin, description);
+	cin.ignore(0, '\n'); //число пропускаемых символов и символ разделения
 	return description;
 }
 
@@ -102,6 +103,38 @@ string BookKeeper::setProfit(int price, int income) {
 	string profit = to_string(income - price);
 	return profit;
 }
+
+//-----------------------------------------------------------
+// Здесь пошел бухгалтер
+
+
+Accountant::~Accountant()
+{
+}
+
+
+void Accountant::getOrdersRecord(OrderList &Orders)  // выводит таблицу-отчет по заказам
+	{ 
+	string Type = "Orders";
+	Orders.display(Type);
+	}
+
+
+// Дисплей: объявление и определение, принимает функцию
+// В реализации метода у бухгалтера вызывать display с нужными аргументами
+// В аргументы : кол - во клиентов и т.д
+
+
+
+
+
+
+
+
+
+
+
+
 
 int main12() {
 //int bookKeeperFunc() {

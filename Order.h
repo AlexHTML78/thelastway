@@ -33,7 +33,7 @@ public:
 
 class OrderList
 {
-private:
+public:
 	// установить указатели на заказ
 	list <Order*> setPtrsOrd; // указатели на класс заказ
 	list <Order*>::iterator iter; //итератор
@@ -41,7 +41,7 @@ public:
 	~OrderList(); // деструктор (удаление заказа)
 	void insertOrder(Order*); // добавить заказ в список
 	//int getNumb(); // возвращает номер 
-	void display(); // вывод списка заказов
+	void display(string); // вывод списка заказов
 };
 
 class OrderInputScreen

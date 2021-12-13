@@ -4,6 +4,9 @@
 #include "Order.h"
 using namespace std;
 
+
+//-----------------------------------------------------------
+// Здесь базовый класс Employee
 Employee::Employee(string data) : FIO(data)
 {
 }
@@ -13,6 +16,7 @@ Employee::Employee()
 	string name;
 	cout << "Введите Ваше ФИО: " << endl;
 	getline(cin, name);
+	cin.ignore(20, '\n');
 	this->FIO = name;
 }
 
@@ -26,17 +30,20 @@ string Employee::getEmployeeFio()
 }
 
 
+
+//-----------------------------------------------------------
+// Здесь пошел секретарь
 BookKeeper::~BookKeeper()
 {
 }
 
-string BookKeeper::setClientFIO() {// добавить данные о жильце
+string BookKeeper::setClientFIO() {
 	cout << "Введите ФИО клиента (Павлов Павел Павлович): " << endl;
 	string clientFIO;
+	cin.ignore(40, '\n');
 	getline(cin, clientFIO);
+
 	return clientFIO;
-	//Client* ptrClient = new Client(clientFIO); // создать клиента
-	//ptrTenantList->insertTenant(ptrTenant);
 }
 
 string BookKeeper::setDeceasedFIO() {
@@ -76,11 +83,11 @@ string BookKeeper::setBurialType() {
 
 
 string BookKeeper::setDescription() {
-	string description;
+	string descr;
 	cout << "Введите подробности заказа: " << endl;
-	getline(cin, description);
-	cin.ignore(0, '\n'); //число пропускаемых символов и символ разделения
-	return description;
+	getline(cin, descr);
+	cin.ignore(40, '\n'); 
+	return descr;
 }
 
 
@@ -96,6 +103,7 @@ string BookKeeper::setIncome() {
 	cout << "Введите доход с оказания услуг: " << endl;
 	string income;
 	cin >> income;
+	cin.ignore(20, '\n');
 	return income;
 }
 
@@ -112,17 +120,17 @@ Accountant::~Accountant()
 {
 }
 
-
-void Accountant::getOrdersRecord(OrderList &Orders)  // выводит таблицу-отчет по заказам
+void Accountant::getMoneyRecord(OrderList &Orders) { 
+	string Type = "Money";
+	Orders.display(Type);
+}
+void Accountant::getOrdersRecord(OrderList &Orders)  
 	{ 
 	string Type = "Orders";
 	Orders.display(Type);
 	}
 
 
-// Дисплей: объявление и определение, принимает функцию
-// В реализации метода у бухгалтера вызывать display с нужными аргументами
-// В аргументы : кол - во клиентов и т.д
 
 
 
@@ -136,25 +144,4 @@ void Accountant::getOrdersRecord(OrderList &Orders)  // выводит таблицу-отчет по
 
 
 
-int main12() {
-//int bookKeeperFunc() {
-	// реализация интерфейся пойдет в main.cpp
-	setlocale(LC_ALL, "rus");
 
-	
-	//BookKeeper bookKeeper1(secrName);
-	while (true) {
-		cout << "press q+enter to exit" << endl;
-		int ch = cin.get();
-		if (ch == 'q') {
-			return 0;
-		}
-		else {
-			//setOrder();
-
-			
-		}
-	}
-	
-	return 0;
-};

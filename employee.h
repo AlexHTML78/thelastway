@@ -1,5 +1,6 @@
 #ifndef __EMPLOYEE_H__
 #define __EMPLOYEE_H__
+
 #include <iostream>
 #include <string>
 using namespace std;
@@ -26,8 +27,9 @@ public:
 	Accountant() :Employee() {};
 	Accountant(string FIO) : Employee(FIO) {};
 	~Accountant();
+
+    void getMoneyRecord(OrderList &Name); // выводит таблицу-отчет по денежному обороту
 	void getOrdersRecord(OrderList &Name); // выводит таблицу-отчет по заказам
-	void display();
 };
 
 

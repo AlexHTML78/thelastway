@@ -114,11 +114,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="employee.h" />
-    <ClInclude Include="Client.h" />
     <ClInclude Include="Order.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Client.cpp" />
     <ClCompile Include="employee.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Order.cpp" />

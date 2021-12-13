@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 #include <list>
-#include "employee.h" //после создания main.cpp проверить, возможно в этой строчке нет необходимости
+#include "employee.h"
 
 using namespace std;
 //Интерфейс класса Заказ.
@@ -18,6 +18,7 @@ public:
 	int Price; //  цена на услугу
 	int Income; //  доход от услуги
 	int Profit; //прибыль бюро от заказа
+
 	int getNumb(); // Ворует номер заказа
 	string getClientFIO(); // ворует ФИО клиента
 	string getDeceasedFIO(); // ворует ФИО умершего
@@ -37,37 +38,20 @@ public:
 	// установить указатели на заказ
 	list <Order*> setPtrsOrd; // указатели на класс заказ
 	list <Order*>::iterator iter; //итератор
-public:
-	~OrderList(); // деструктор (удаление заказа)
+
+	~OrderList(); // деструктор 
 	void insertOrder(Order*); // добавить заказ в список
-	//int getNumb(); // возвращает номер 
 	void display(string); // вывод списка заказов
 };
 
 class OrderInputScreen
 {
-private:
-	
-	string tName;
-	int OrdNumb;
+
 public:
 	OrderInputScreen(OrderList* ptrTL) : ptrOrderList(ptrTL) {};
 	void setOrder(BookKeeper &name,int); // добавить данные о заказе
-	OrderList* ptrOrderList;
+	OrderList* ptrOrderList; //указатель на список
 };
 
-
-// удалить
-class UserInterface
-{
-private:
-	OrderList* ptrOrderList;
-	OrderInputScreen* ptrOrderInputScreen;
-	char ch;
-public:
-	UserInterface();
-	~UserInterface();
-	void interact();
-};
 
 #endif // __ORDER_H__

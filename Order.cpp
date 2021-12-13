@@ -2,7 +2,6 @@
 #include <string>
 #include "Order.h"
 #include "employee.h"
-
 using namespace std;
 
 Order::Order(int Number):Numb(Number)
@@ -57,7 +56,7 @@ void getaLine(string& inStr) // получение строки текста
 char getaChar() // получение символа
 {
 	char ch = cin.get();
-	cin.ignore(80, '\n'); //число пропускаемых символов и символ разделения
+	cin.ignore(80, '\n');
 	return ch;
 }
 
@@ -70,8 +69,8 @@ void OrderInputScreen::setOrder(BookKeeper &name, int i) // добавить данные о за
 
 	ptrOrder->ClientFIO = name.setClientFIO(); 
 	ptrOrder->DeceasedFIO = name.setDeceasedFIO();
-	ptrOrder->BurialType =  name.setBurialType();
 	ptrOrder->Description = name.setDescription();
+	ptrOrder->BurialType = name.setBurialType();
 	ptrOrder->Price = stoi(name.setPrice());
 	ptrOrder->Income = stoi(name.setIncome());
 	ptrOrder->Profit = stoi(name.setProfit(ptrOrder->Price, ptrOrder->Income));
@@ -105,46 +104,44 @@ void OrderList::display(string Type) // вывод списка заказов
 	else
 		{
 		iter = setPtrsOrd.begin();
-		cout << "№" << "\t" <<"Клиент" << "\t" << "Умерший" << "\t" <<"Подробности"<<"\t"<< "Способ захоронения" <<"\t"<<"Стоимость"
+		cout << "№" << "\t" <<"Клиент" << "\t\t" << "Умерший" << "\t\t" <<"Подробности"<<"\t\t"<< "Способ захоронения" <<"\t"<<"Стоимость"
 			<< "\t" << "Доход"<<"\t" << "Прибыль" << endl; // заголовок таблицы
 		while (iter != setPtrsOrd.end()) // распечатываем список всех заказов
 			{
-
-			cout << (*iter)->getNumb() << " \t " << (*iter)->getClientFIO() << "\t" << (*iter)->getDeceasedFIO()<<"\t" << (*iter)->getDescription()
-				<<"\t"<< (*iter)->getBurialType()<<"\t"<< (*iter)->getPrice() <<"\t"<< (*iter)->getIncome()<<"\t"
-				 << (*iter)->getProfit()<< endl; //построчный вывод данных
+			cout <<  (*iter)->getNumb() << " \t " << (*iter)->getClientFIO() <<  "\t\t" << (*iter)->getDeceasedFIO() <<  "\t" << (*iter)->getDescription() <<
+				"\t\t"<< (*iter)->getBurialType()<<"\t"<< (*iter)->getPrice() <<"\t"<< (*iter)->getIncome()<<"\t"
+				 << (*iter)->getProfit()<< endl; //построчный вывод данных 
 			*iter++;
 			}
 		}
 	}
-	
+	if (Type == "Money")
+	{
+		if (setPtrsOrd.empty()) // если список заказов пуст
+			cout << "***Нет данных***\n" << endl; // выводим запись, что он пуст)
+		else
+		{
+			int Numbers=0,Prices=0,Incomes=0,Profits=0;
+			Numbers = 0;
+			iter = setPtrsOrd.begin();
+			cout << "Кол-во клиентов в базе" << "\t" << "Расходы" << "\t" <<
+			"Доход" << "\t" << "Прибыль" << "\t" << endl; // заголовок таблицы
+			while (iter != setPtrsOrd.end()) // распечатываем список всех заказов
+			{
+				Prices += (*iter)->getPrice();
+				Incomes += (*iter)->getIncome();
+				Profits += (*iter)->getProfit();
+				Numbers++;
+				*iter++;
+			}
+			cout << Numbers<<"\t\t\t"<<Prices << "\t" << Incomes << "\t" << Profits << "\t" << endl;
+		}
+	}
 }
 //---------------------------------------------------------
 
 
 
-int main() {
-	setlocale(LC_ALL, "rus");
 
-	// это все отправляется в main.cpp
-	BookKeeper bookKeeper1;
-	Accountant Buhg;
-	OrderList* ptrOrderList;
-	ptrOrderList = new OrderList;
-	OrderInputScreen* ptrOrderInputScreen;
-	for (int i = 0;i < 3;i++) {
-		ptrOrderInputScreen =
-		new OrderInputScreen(ptrOrderList);
-		ptrOrderInputScreen->setOrder(bookKeeper1, i);
-		cin.ignore(20, '\n'); //число пропускаемых символов и символ разделения
-		delete ptrOrderInputScreen;
-	}
-	
-	Buhg.getOrdersRecord(*ptrOrderList);
-
-
-	return 0;
-
-};
 
 

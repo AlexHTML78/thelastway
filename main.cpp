@@ -4,8 +4,8 @@
 #include "employee.h"
 
 int main() {
-	cout << "\t\t\t\t" << "Похоронное Бюро \"Деревянный Пиджачок\" " << endl;
 	setlocale(LC_ALL, "rus");
+	cout << "\t\t\t\t" << "Похоронное Бюро \"Деревянный Пиджачок\" " << endl;
 	OrderList* ptrOrderList;
 	ptrOrderList = new OrderList;
 	string bookKeeperName;

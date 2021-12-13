@@ -85,8 +85,8 @@ string BookKeeper::setBurialType() {
 string BookKeeper::setDescription() {
 	string descr;
 	cout << "Введите подробности заказа: " << endl;
+	//cin.ignore(40, '\n');
 	getline(cin, descr);
-	cin.ignore(40, '\n'); 
 	return descr;
 }
 
@@ -103,7 +103,7 @@ string BookKeeper::setIncome() {
 	cout << "Введите доход с оказания услуг: " << endl;
 	string income;
 	cin >> income;
-	cin.ignore(20, '\n');
+	
 	return income;
 }
 
